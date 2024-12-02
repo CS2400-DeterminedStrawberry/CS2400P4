@@ -63,4 +63,61 @@ public final class Graph<T> implements GraphInterface<T>
 		vertices.clear();
 		edgeCount = 0;
 	}
+
+	public QueueInterface<T> getBreadthFirstTraversal(T origin) {
+        QueueInterface<T> traversalOrder = new LinkedQueue<>();
+        QueueInterface<VertexInterface<T>> vertexQueue = new LinkedQueue<>();
+        VertexInterface<T> originVertex = vertices.getValue(origin);
+
+        if (originVertex != null) {
+            originVertex.visit();
+            traversalOrder.enqueue(origin);
+            vertexQueue.enqueue(originVertex);
+
+            while (!vertexQueue.isEmpty()) {
+                VertexInterface<T> frontVertex = vertexQueue.dequeue();
+                Iterator<VertexInterface<T>> neighbors = frontVertex.getNeighborIterator();
+
+                while (neighbors.hasNext()) {
+                    VertexInterface<T> nextNeighbor = neighbors.next();
+                    if (!nextNeighbor.isVisited()) {
+                        nextNeighbor.visit();
+                        traversalOrder.enqueue(nextNeighbor.getLabel());
+                        vertexQueue.enqueue(nextNeighbor);
+                    }
+                }
+            }
+        }
+
+        resetVertices();
+        return traversalOrder;
+    }
+
+    public QueueInterface<T> getDepthFirstTraversal(T origin) {
+        QueueInterface<T> traversalOrder = new LinkedQueue<>();
+        StackInterface<VertexInterface<T>> vertexStack = new LinkedStack<>();
+        VertexInterface<T> originVertex = vertices.getValue(origin);
+
+        if (originVertex != null) {
+            originVertex.visit();
+            traversalOrder.enqueue(origin);
+            vertexStack.push(originVertex);
+
+            while (!vertexStack.isEmpty()) {
+                VertexInterface<T> topVertex = vertexStack.peek();
+                VertexInterface<T> nextNeighbor = topVertex.getUnvisitedNeighbor();
+
+                if (nextNeighbor != null) {
+                    nextNeighbor.visit();
+                    traversalOrder.enqueue(nextNeighbor.getLabel());
+                    vertexStack.push(nextNeighbor);
+                } else {
+                    vertexStack.pop();
+                }
+            }
+        }
+
+        resetVertices();
+        return traversalOrder;
+    }
 } // end DirectedGraph
