@@ -14,4 +14,4 @@ traversal and depth first traversal.
 ***CPP email:*** acquach@cpp.edu  
 ***Contribution:*** Implemented testing algorithms that runs test cases for Graph. It focuses on breadth first traversal and depth first traversal. Wrote JUnitTesting for graph. 
 
-*** Contains: ***Java Package and Inheritance
+***Contains:*** Java Package and Inheritance
