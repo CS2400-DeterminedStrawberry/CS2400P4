@@ -18,8 +18,41 @@ public final class LinkedQueue<T> implements QueueInterface<T>
 		lastNode = null;
 	} // end default constructor
 
-//  < Implementations of the queue operations go here. >
-//  . . .
+	public void enqueue(T newEntry) {
+		Node newNode = new Node(newEntry, null);
+		if (isEmpty())
+			firstNode = newNode;
+		else
+			lastNode.setNextNode(newNode);
+		lastNode = newNode; //Check this later
+	} //end enqueue
+
+	public T dequeue() {
+		T front = null;
+		if (!isEmpty()) {
+			front = firstNode.getData();
+			firstNode = firstNode.getNextNode();
+			if (firstNode == null)
+				lastNode = null;
+		}//end if
+		return front;
+	} //end dequeue
+
+	public T getFront() {
+		T front = null;
+		if (!isEmpty())
+			front = firstNode.getData();
+		return front;
+	} //end getFront
+
+	public boolean isEmpty() {
+		return ((firstNode == null) && (lastNode == null));
+	}//end isEmpty
+
+	public void clear() {
+		firstNode = null;
+		lastNode = null;
+	}//end clear
 
 	private class Node
 	{
