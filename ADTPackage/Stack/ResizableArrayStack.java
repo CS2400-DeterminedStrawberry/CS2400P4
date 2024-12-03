@@ -37,8 +37,6 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
         integrityOK = true;
     } // end constructor
 
-    //  < Implementations of the stack operations go here. >
-
     /**
      * Adds a new entry to the top of the stack.
      * @param newEntry The entry to be added to the stack
@@ -48,7 +46,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
         ensureCapacity();
         stack[topIndex + 1] = newEntry;
         topIndex++;
-    }
+    }// end push
 
     /**
      * Removes and returns the top entry of the stack.
@@ -65,7 +63,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
             topIndex--;
             return top;
         }
-    }
+    }//end pop
 
     /**
      * Retrieves the top entry of the stack without removing it.
@@ -79,7 +77,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
         } else {
             return stack[topIndex];
         }
-    }
+    }//end peek
 
     /**
      * Checks whether the stack is empty.
@@ -87,7 +85,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
      */
     public boolean isEmpty() {
         return topIndex < 0;
-    }
+    }//end isEmpty
 
     /**
      * Removes all entries from the stack.
@@ -98,10 +96,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
             stack[topIndex] = null;
             topIndex--;
         }
-    }
-
-    //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
-    //    are analogous to those in Chapter 2. >
+    }//end clear
 
     /**
      * Ensures the stack has enough capacity to accommodate additional entries.
@@ -112,7 +107,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
             checkCapacity(newLength);
             stack = Arrays.copyOf(stack, newLength);
         }
-    }
+    }// end ensureCapacity
 
     /**
      * Checks the integrity of the stack.
@@ -122,7 +117,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
         if (!integrityOK) {
             throw new SecurityException("ResizableArrayStack object is corrupt.");
         }
-    }
+    } //end checkIntegrity
 
     /**
      * Checks if the specified capacity exceeds the maximum allowed capacity.
@@ -134,5 +129,5 @@ public final class ResizableArrayStack<T> implements StackInterface<T> {
             throw new IllegalStateException("Attempt to create a stack whose " +
                                             "capacity exceeds allowed maximum of " + MAX_CAPACITY);
         }
-    }
+    }//end checkCapacity
 } // end ArrayStack
