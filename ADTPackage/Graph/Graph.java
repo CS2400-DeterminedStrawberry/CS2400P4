@@ -117,8 +117,8 @@ public final class Graph<T> implements GraphInterface<T>
 		//queue to store the traversal order
         QueueInterface<T> traversalOrder = new LinkedQueue<>();
 
-		//stack to perform depth-first traversal
-        StackInterface<VertexInterface<T>> vertexStack = new LinkedStack<>();
+		// Stack to perform depth-first traversal
+        StackInterface<VertexInterface<T>> vertexStack = new ResizableArrayStack<>();
 
 		//get vertex corresponding to origin value and mark it as visited
         VertexInterface<T> originVertex = vertices.getValue(origin);
